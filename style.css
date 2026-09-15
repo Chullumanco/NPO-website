@@ -1,0 +1,295 @@
+/* --- 1. Variables & Global Styles --- */
+:root {
+    --color-black: #0B0B0B;
+    --color-gold: #D3A121;
+    --color-cream: #FAF4E4;
+    --font-main: 'Inter', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-main);
+    background-color: var(--color-cream);
+    color: var(--color-black);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow-x: hidden;
+    
+    /* PAGE LOAD ANIMATION */
+    opacity: 0;
+    transform: translateY(15px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+body.page-loaded {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+body.page-exiting {
+    opacity: 0;
+    transform: translateY(-15px);
+}
+
+/* --- 2. Header & Footer --- */
+header, footer {
+    background-color: var(--color-gold);
+    color: var(--color-black);
+    display: flex;
+    align-items: center; /* Centers items vertically */
+    padding: 0 4rem; /* Removed top/bottom padding to control height strictly */
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: 90px; /* Fixed height for the header */
+}
+
+header {
+    justify-content: space-between;
+}
+
+footer {
+    position: sticky;
+    bottom: 0;
+    justify-content: flex-start;
+    height: 60px; /* Smaller fixed height for footer */
+    font-size: 0.9rem;
+    margin-top: auto;
+}
+
+/* --- HEADER LOGO SIZING (The Fix) --- */
+header .logo {
+    display: flex;
+    align-items: center;
+    height: 100%; /* Take up the full 100px height of the header */
+}
+
+header .logo img {
+    height: 85px; /* Logo takes up 85% of the header height (leaves a little breathing room) */
+    width: auto; /* Keeps proportions perfect */
+    object-fit: contain;
+    display: block;
+    margin-top: 5px;
+    transition: transform 0.3s ease;
+}
+
+header .logo:hover img {
+    transform: scale(1.05); /* Slight zoom effect when hovering over the logo */
+}
+
+/* --- Navigation --- */
+nav {
+    display: flex;
+    align-items: center;
+}
+
+nav a {
+    color: var(--color-black);
+    text-decoration: none;
+    margin-left: 2rem;
+    font-weight: 600;
+    font-size: 1rem;
+    position: relative;
+    transition: opacity 0.3s ease;
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -6px;
+    left: 0;
+    background-color: var(--color-black);
+    transition: width 0.3s ease;
+}
+
+nav a:hover::after, nav a.active::after {
+    width: 100%;
+}
+
+/* --- 3. Main Layout --- */
+main {
+    flex-grow: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4rem;
+    width: 100%;
+}
+
+.content-left {
+    width: 50%;
+}
+
+.content-right {
+    width: 50%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+/* --- 4. Typography & Main Logo --- */
+h1 {
+    font-size: 4.5rem;
+    font-weight: 400;
+    line-height: 1.1;
+    margin-bottom: 2rem;
+    letter-spacing: -1px;
+}
+
+h2 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+}
+
+p {
+    font-size: 1.1rem;
+    font-weight: 400;
+    line-height: 1.6;
+}
+
+.main-logo {
+    max-width: 100%; 
+    width: 400px; /* Adjusted size slightly so it doesn't overwhelm the page */
+    height: auto;    
+    object-fit: contain;
+}
+
+/* --- 5. Executive Specific Layouts & Images --- */
+.executive-grid {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    text-align: center;
+}
+
+.exec-card {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.executive-image img {
+    width: 100%;
+    max-width: 350px;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    display: block;
+}
+
+.exec-card h3 {
+    font-size: 1.3rem;
+    font-weight: 800;
+    margin-bottom: 0.3rem;
+}
+
+.exec-card h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+    color: var(--color-black);
+    opacity: 0.75;
+}
+
+.exec-card ul {
+    text-align: left;
+    list-style: disc;
+    padding-left: 1.2rem;
+    line-height: 1.6;
+    max-width: 350px;
+}
+
+.exec-card ul li {
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+
+/* --- 6. Contact Specific Layouts --- */
+.contact-details {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 3rem;
+    font-size: 0.9rem;
+}
+
+/* --- 7. Responsive Design (Mobile) --- */
+@media (max-width: 900px) {
+    header {
+        flex-direction: column;
+        height: auto; /* Let header expand on mobile */
+        padding: 1rem 2rem;
+        gap: 1rem;
+    }
+    
+    header .logo {
+        height: 60px; /* Smaller logo block on mobile */
+    }
+
+    footer {
+        height: auto;
+        padding: 1.5rem 2rem;
+        text-align: center;
+        justify-content: center;
+    }
+    
+    nav { 
+        flex-wrap: wrap; 
+        justify-content: center; 
+        gap: 1rem; 
+    }
+    
+    nav a { 
+        margin-left: 0; 
+    }
+
+    main { 
+        padding: 2rem; 
+        flex-direction: column; 
+        text-align: center; 
+        justify-content: center; 
+    }
+
+    .content-left, .content-right { 
+        width: 100%; 
+    }
+
+    .content-right { 
+        justify-content: center; 
+        margin-top: 2rem; 
+    }
+
+    h1 { 
+        font-size: 3rem; 
+    }
+    
+    .main-logo {
+        width: 70%; 
+        margin-top: 1rem;
+    }
+
+    .executive-grid { 
+        flex-direction: column; 
+        align-items: center; 
+        gap: 3rem; 
+    }
+
+    .exec-card { 
+        width: 100%; 
+    }
+
+    .contact-details { 
+        flex-direction: column; 
+        gap: 1.5rem; 
+    }
+}
