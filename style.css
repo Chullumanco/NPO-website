@@ -24,7 +24,7 @@ body {
     /* PAGE LOAD ANIMATION */
     opacity: 0;
     transform: translateY(15px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    transition: opacity 0.4s ease-out, transform 0.4s ease-out;
 }
 
 body.page-loaded {
@@ -42,12 +42,12 @@ header, footer {
     background-color: var(--color-gold);
     color: var(--color-black);
     display: flex;
-    align-items: center; /* Centers items vertically */
-    padding: 0 4rem; /* Removed top/bottom padding to control height strictly */
+    align-items: center; 
+    padding: 0 4rem; 
     position: sticky;
     top: 0;
     z-index: 100;
-    height: 90px; /* Fixed height for the header */
+    height: 90px; 
 }
 
 header {
@@ -58,35 +58,37 @@ footer {
     position: sticky;
     bottom: 0;
     justify-content: flex-start;
-    height: 60px; /* Smaller fixed height for footer */
+    gap: 7rem;
+    height: 60px; 
     font-size: 0.9rem;
     margin-top: auto;
 }
 
-/* --- HEADER LOGO SIZING (The Fix) --- */
+/* --- HEADER LOGO SIZING --- */
 header .logo {
     display: flex;
     align-items: center;
-    height: 100%; /* Take up the full 100px height of the header */
+    height: 100%; 
+    order: 2;
 }
 
 header .logo img {
-    height: 85px; /* Logo takes up 85% of the header height (leaves a little breathing room) */
-    width: auto; /* Keeps proportions perfect */
+    height: 80px; 
+    width: auto; 
     object-fit: contain;
     display: block;
-    margin-top: 5px;
     transition: transform 0.3s ease;
 }
 
 header .logo:hover img {
-    transform: scale(1.05); /* Slight zoom effect when hovering over the logo */
+    transform: scale(1.05); 
 }
 
 /* --- Navigation --- */
 nav {
     display: flex;
     align-items: center;
+    order: 1;
 }
 
 nav a {
@@ -158,7 +160,7 @@ p {
 
 .main-logo {
     max-width: 100%; 
-    width: 400px; /* Adjusted size slightly so it doesn't overwhelm the page */
+    width: 400px; 
     height: auto;    
     object-fit: contain;
 }
@@ -172,7 +174,7 @@ p {
 }
 
 .exec-card {
-    width: 40%;
+    width: 45%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -221,25 +223,45 @@ p {
     justify-content: space-between;
     margin-top: 3rem;
     font-size: 0.9rem;
+    gap: 2rem;
 }
 
-/* --- 7. Responsive Design (Mobile) --- */
+/* --- 7. RESPONSIVE DESIGN: Mobile Portrait (Stacked) --- */
 @media (max-width: 900px) {
+
+    header .logo {
+        order: 1;
+    }
+    nav {
+        order: 2;
+    }
+    
     header {
         flex-direction: column;
-        height: auto; /* Let header expand on mobile */
-        padding: 1rem 2rem;
+        height: auto; 
+        padding: 1.5rem 1rem;
         gap: 1rem;
     }
     
     header .logo {
-        height: 60px; /* Smaller logo block on mobile */
+        height: 60px; 
+    }
+
+    header .logo img {
+        height: 60px;
     }
 
     footer {
         height: auto;
-        padding: 1.5rem 2rem;
+        padding: 1.5rem 1rem;
+        flex-direction: column;
         text-align: center;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+
+    footer .content-right {
+        width: 100%;
         justify-content: center;
     }
     
@@ -251,13 +273,15 @@ p {
     
     nav a { 
         margin-left: 0; 
+        font-size: 0.9rem;
     }
 
     main { 
-        padding: 2rem; 
+        padding: 2rem 1rem; 
         flex-direction: column; 
         text-align: center; 
-        justify-content: center; 
+        justify-content: flex-start;
+        gap: 2rem;
     }
 
     .content-left, .content-right { 
@@ -266,15 +290,24 @@ p {
 
     .content-right { 
         justify-content: center; 
-        margin-top: 2rem; 
+        margin-top: 0; 
     }
 
     h1 { 
-        font-size: 3rem; 
+        font-size: 2.5rem; 
+        margin-bottom: 1rem;
+    }
+    
+    h2 {
+        font-size: 1.2rem;
+    }
+
+    p {
+        font-size: 1rem;
     }
     
     .main-logo {
-        width: 70%; 
+        width: 60%; 
         margin-top: 1rem;
     }
 
@@ -291,5 +324,125 @@ p {
     .contact-details { 
         flex-direction: column; 
         gap: 1.5rem; 
+        text-align: center;
+    }
+}
+
+/* --- 8. RESPONSIVE DESIGN: Mobile Landscape (Side-by-Side, Shrunken) --- */
+@media (max-height: 500px) and (orientation: landscape) {
+    
+    /* 1. Header becomes horizontal again, but tighter */
+    header {
+        flex-direction: row; 
+        height: 60px;        
+        padding: 0 1.5rem;
+    }
+
+    header .logo {
+        height: 100%;
+    }
+
+    header .logo img {
+        height: 45px; 
+    }
+
+    /* 2. Navigation compact */
+    nav {
+        flex-wrap: nowrap;
+        gap: 0.5rem;
+    }
+
+    nav a {
+        font-size: 0.75rem; 
+        margin-left: 0.8rem;
+    }
+
+    /* 3. Main content side-by-side */
+    main {
+        flex-direction: row; 
+        padding: 1.5rem;
+        text-align: left;
+        gap: 1rem;
+        align-items: center;
+    }
+
+    .content-left, .content-right {
+        width: 50%;
+    }
+
+    .content-right {
+        justify-content: flex-end;
+        margin-top: 0;
+    }
+
+    /* 4. Drastically reduce text size */
+    h1 {
+        font-size: 2rem; 
+        margin-bottom: 0.5rem;
+        line-height: 1.1;
+    }
+
+    h2 {
+        font-size: 1rem;
+        margin-bottom: 0.3rem;
+    }
+
+    p {
+        font-size: 0.85rem;
+        line-height: 1.4;
+    }
+
+    .main-logo {
+        width: 40%; 
+        margin-top: 0;
+    }
+
+    /* 5. Executive Grid side-by-side */
+    .executive-grid {
+        flex-direction: row;
+        gap: 2rem;
+        align-items: flex-start;
+    }
+
+    .exec-card {
+        width: 45%;
+    }
+
+    .executive-image img {
+        max-width: 150px; 
+        margin-bottom: 0.5rem;
+    }
+
+    .exec-card h3 { font-size: 0.9rem; }
+    .exec-card h4 { font-size: 0.75rem; margin-bottom: 0.3rem; }
+    .exec-card ul { font-size: 0.75rem; padding-left: 1rem; }
+    .exec-card ul li { margin-bottom: 0.2rem; }
+
+    /* 6. Contact Details side-by-side */
+    .contact-details {
+        flex-direction: row;
+        gap: 1rem;
+        text-align: left;
+        margin-top: 1rem;
+        font-size: 0.75rem;
+    }
+    
+    .contact-details p {
+        font-size: 0.75rem;
+    }
+
+    /* 7. Footer horizontal */
+    footer {
+        flex-direction: row;
+        height: 40px;
+        padding: 0 1.5rem;
+        justify-content: space-between;
+        font-size: 0.7rem;
+        gap: 0;
+    }
+
+    footer .content-right {
+        width: auto;
+        justify-content: flex-end;
     }
 }

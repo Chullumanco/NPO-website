@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Wait for the animation to finish (600ms matches the CSS), then go to the new page
                 setTimeout(() => {
                     window.location.href = targetUrl;
-                }, 600);
+                }, 400);
             }
         });
     });
